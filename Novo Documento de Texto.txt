@@ -1,0 +1,4 @@
+git status (verifica rse realmente aconteceu alteração)
+git add .
+git commit -m "descrição da alteração"
+git push (clicar no link)
