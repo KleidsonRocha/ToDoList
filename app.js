@@ -12,11 +12,26 @@ const criarItem = (text, date, status, indice) => {
     const item = document.createElement('label');
 
     item.classList.add('todo__item');
-    item.innerHTML = `
-        <input type="checkbox" ${status} data-indice=${indice}>
-        <div>${text}</div>
-        <div>${date}</div>
-        <input type="button" value="Excluir" data-indice=${indice}>
+    item.innerHTML = `        
+        <li class="list-group-item ">
+            <div class="row">
+                <div class="col">
+                    ${text}
+                </div>
+            <div class="col-md-auto">
+                <span class="badge badge-primary badge-pill">${date}</span>
+            </div>
+            <div class="col col-lg-2">
+                <label class="btn btn-secondary active">
+                    <input type="checkbox" ${status} data-indice=${indice}> Feito
+                </label>
+                <label class="btn active">
+                    <button type="button" class="btn btn-danger" data-indice=${indice}>Excluir</button>
+                </label>
+            </div>
+            </div>
+        </li>
+        
     `
 
     document.getElementById('todoList').appendChild(item);
@@ -53,6 +68,7 @@ function addOnBank() {
 //ADD BY PRESSING ENTER
 document.getElementById('newItem').addEventListener('keypress', (event) => {
     const tecla = event.key;
+    console.log(tecla);
     if(tecla === 'Enter'){
        addOnBank()
     }

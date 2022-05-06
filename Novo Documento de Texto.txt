@@ -2,3 +2,7 @@ git status (verifica rse realmente aconteceu alteração)
 git add .
 git commit -m "descrição da alteração"
 git push (clicar no link)
+
+
+
+fazer a parte do feito(provavlemente com o render)
