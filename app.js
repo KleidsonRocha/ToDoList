@@ -1,10 +1,3 @@
-
-
-//let bank = [
-//    {'tarefa': 'Estudar','date': '', 'status': ''},
-//    {'tarefa': 'Dormir','date': '', 'status': 'checked'}
-//]
-
 const getbank = () => JSON.parse(localStorage.getItem('todoList')) ?? [];
 const setBank = (bank) => localStorage.setItem('todoList', JSON.stringify(bank))
 
@@ -13,7 +6,7 @@ const criarItem = (text, date, status, indice) => {
 
     item.classList.add('todo__item');
     item.innerHTML = `        
-        <li class="list-group-item ">
+        <li id="listControl" class="list-group-item ${status}">
             <div class="row">
                 <div class="col">
                     ${text}
@@ -23,7 +16,7 @@ const criarItem = (text, date, status, indice) => {
             </div>
             <div class="col col-lg-2">
                 <label class="btn btn-secondary active">
-                    <input type="checkbox" ${status} data-indice=${indice}> Feito
+                    <input id="checkbox" type="checkbox" ${status} data-indice=${indice}> Feito
                 </label>
                 <label class="btn active">
                     <button type="button" class="btn btn-danger" data-indice=${indice}>Excluir</button>
@@ -33,7 +26,6 @@ const criarItem = (text, date, status, indice) => {
         </li>
         
     `
-
     document.getElementById('todoList').appendChild(item);
 } 
 
@@ -48,7 +40,7 @@ const clearRender = () => {
 const render = () => {
     clearRender();
     const bank = getbank();
-    bank.forEach( (item, indice) => criarItem (item.tarefa,item.date, item.status, indice));
+    bank.forEach( (item, indice) => criarItem(item.tarefa, item.date, item.status, indice));
 }
 
 //ADD TO THE BANK
@@ -68,7 +60,7 @@ function addOnBank() {
 //ADD BY PRESSING ENTER
 document.getElementById('newItem').addEventListener('keypress', (event) => {
     const tecla = event.key;
-    console.log(tecla);
+
     if(tecla === 'Enter'){
        addOnBank()
     }
@@ -87,6 +79,12 @@ document.getElementById('todoList').addEventListener('click', (event) => {
         const bank = getbank()
         bank[indice].status = bank[indice].status === '' ? 'checked' : '';
         setBank(bank)
+        if(bank[indice].status === 'checked') {
+            document.getElementsByClassName('list-group-item')[indice].classList.add("checked")
+        }else if (bank[indice].status === '') {
+
+        }
+
         render();
     }
 });
